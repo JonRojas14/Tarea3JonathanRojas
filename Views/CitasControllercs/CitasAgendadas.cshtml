@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TareaNo._3_Jonathan_Rojas_3101.Models.Citas> //establece sobre que modelo se esta trabajando
+
+@{
+    ViewData["Title"] = "CitasAgendadas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container"> <!--Construccion de la vista con bootstrap que viene instalado por defecto en asp.net core MMVC-->
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Lista de Citas</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block" asp-action="Index" asp-controller="CitasControllercs">Agregar Cita</a>
+        </div>
+
+    </div>
+
+    <div class="row">
+            @if (Model.Count() > 0) //comprueba si hay registros
+            {
+                <table class="table table-sortable" id="results">
+                    <thead>
+                        <tr>
+                            <!--m es una expresion lambda-->
+                            <td>@Html.DisplayNameFor(m => m.Id)</td>
+                            <td>@Html.DisplayNameFor(m => m.Especialidad)</td>
+                            <td>@Html.DisplayNameFor(m => m.Cita)</td>
+                            <td>@Html.DisplayNameFor(m => m.Descripcion)</td>
+                            <td>@Html.DisplayNameFor(m => m.Estado)</td>
+                            <td>Acciones</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderByDescending(m => m.Cita))
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Especialidad</td>
+                                <td>@item.Cita</td>
+                                <td>@item.Descripcion</td>
+                                <td>@item.Estado</td>
+                                <td>
+                                    <a asp-controller="CitasControllercs" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar Estado</a>
+                                    <a asp-controller="CitasControllercs" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Borrar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else 
+            {
+                <p>No existen datos</p>
+            }
+        </div>
+</div>
+

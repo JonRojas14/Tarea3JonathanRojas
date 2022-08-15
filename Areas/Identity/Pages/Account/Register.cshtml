@@ -1,0 +1,68 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-10">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Input.Identificacion"></label>
+                <input asp-for="Input.Identificacion" class="form-control" autocomplete="identificacion" aria-required="true" />
+                <span asp-validation-for="Input.Identificacion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.NombreCompleto"></label>
+                <input asp-for="Input.NombreCompleto" class="form-control"  autocomplete="nombrecompleto" aria-required="true"/>
+                <span asp-validation-for="Input.NombreCompleto" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">   
+                <label asp-for="Input.FechaDeNacimiento"></label>
+                <input asp-for="Input.FechaDeNacimiento" class="form-control" autocomplete="fechadenacimiento" aria-required="true"/>
+                <span asp-validation-for="Input.FechaDeNacimiento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.MetodoPago"></label>
+                <input asp-for="Input.MetodoPago" class="form-control" autocomplete="metodopago" aria-required="true" list="metodos"/>
+                <span asp-validation-for="Input.MetodoPago" class="text-danger"></span>
+                  <datalist id="metodos">
+                       <option value="Tarjeta"></option>
+                       <option value="Depósito"></option>
+                       <option value="SINPE Móvil"></option>
+                   </datalist>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+             <div class="form-group">
+                 <label asp-for="Input.Password"></label>
+                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                 <span asp-validation-for="Input.Password" class="text-danger"></span>    
+             </div>
+
+             <div class="form-group">
+                 <label asp-for="Input.ConfirmPassword"></label>
+                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>    
+             </div>
+
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

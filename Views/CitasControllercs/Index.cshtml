@@ -1,0 +1,82 @@
+﻿@model TareaNo._3_Jonathan_Rojas_3101.Models.Citas
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container"> <!--Contenedor del formulario para crear un nuevo registro de citas-->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Agendar Cita</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10">
+            <form method="post" asp-action="Index" id="form1">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                   <label asp-for="Especialidad" class="control-label" ></label>
+                   <input asp-for="Especialidad" class="form-control" list="ListaEspecialidad"/>
+                   <span asp-validation-for="Especialidad" class="text-danger"></span>
+                   <datalist id="ListaEspecialidad">
+                       <option value="Laboral"></option>
+                       <option value="Penal"></option>
+                       <option value="Familia"></option>
+                       <option value="Civil"></option>
+                       <option value="Comercio"></option>
+                       <option value="Notariado"></option>
+                   </datalist>
+                </div>
+
+                 <div class="form-group">
+                   <label asp-for="Cita" class="control-label" ></label>
+                   <input asp-for="Cita" class="form-control" max="@DateTime.Now.AddDays(22).ToString("yyyy-MM-ddThh:mm")" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddThh:mm")" />
+                   <span asp-validation-for="Cita" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                   <label asp-for="Descripcion" class="control-label" ></label>
+                   <input asp-for="Descripcion" class="form-control" />
+                   <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                   <label asp-for="Estado" class="control-label" ></label>
+                   <input asp-for="Estado" class="form-control" value="Activa"  readonly/>
+                   <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Agendar" class="btn btn-primary" />
+                </div>
+
+            </form>
+
+            @if (ViewBag.Message != null)
+            {
+                <script type="text/javascript">
+                    window.onload = function() {
+                        alert("@ViewBag.Message");
+                    };
+                </script>
+            }
+
+         
+            
+        </div> 
+          
+    </div>
+
+</div>
+
+
+@section Scripts{ <!--toma las validaciones del lado cliente-->
+
+    @{ <partial name="_ValidationScriptsPartial" />}
+
+}
+
+
